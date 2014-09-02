@@ -3,7 +3,8 @@
 
 Easily set up a fresh new Raspberry Pi for use as a web browser based kiosk.
 
-For more information check out the original blog post at [blog post](http://www.geckoboard.com/blog/geckoboard-and-raspberry-pi).
+For more information check out the original blog post for the folks at Geckoboard
+at [blog post](http://www.geckoboard.com/blog/geckoboard-and-raspberry-pi).
 
 
 # how to
