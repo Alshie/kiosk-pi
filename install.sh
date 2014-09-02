@@ -111,6 +111,7 @@ mkdir -p $autoStartConfigPath
 echo "xset s noblank " > $autoStartFile
 echo "xset s off " >> $autoStartFile
 echo "xset -dpms" >> $autoStartFile
+echo "sudo ntpdate -u ntp.ubuntu.com" >> $autoStartFile
 echo "chromium --kiosk --incognito --disable-infobars --disable-translate --enable-offline-auto-reload-visible-only $dashUrl" >> $autoStartFile
 
 echo "All good!"
