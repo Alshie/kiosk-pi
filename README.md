@@ -14,11 +14,11 @@ Make sure your Pi is online. Open a terminal emulator, and run these two command
 ```bash
 export DASHBOARD_URL=https://webaddress.com:8080
 
-curl -L https://raw.github.com/stevebargelt/kiosk-pi/master/install.sh | bash
+curl -L https://raw.githubusercontent.com/stevebargelt/kiosk-pi/master/install.sh | bash
 ```
 
 You can revert your Pi with:
 
 ```bash
-curl -L https://raw.github.com/stevebargelt/kiosk-pi/master/rollback.sh | bash
+curl -L https://raw.githubusercontent.com/stevebargelt/kiosk-pi/master/rollback.sh | bash
 ```
