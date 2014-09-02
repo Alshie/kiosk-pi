@@ -17,12 +17,15 @@ sudo mv $xAutostartBackup $xAutostart
 
 #mv $bakDir/bashrc $HOME/.bashrc
 
-while true; do
-    read -p "Do you wish to uninstall Chromium?" yn
+
+echo "Do you wish to also uninstall Chromium?"
+select yn in "Yes" "No"; do
     case $yn in
-        [Yy]* ) sudo apt-get remove chromium -y;
-			sudo apt-get autoremove -y; break;;
-        [Nn]* ) exit;;
-        * ) echo "Please answer yes or no.";;
+        Yes ) 
+			sudo apt-get remove chromium -y;
+			sudo apt-get autoremove -y;
+			break;;
+        No ) 
+			break;;
     esac
 done
