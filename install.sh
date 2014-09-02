@@ -26,7 +26,7 @@ echo "Welcome to Kiosk Pi setup!"
 if which chromium 2>&1 > /dev/null ; then
   echo "Chromium is already installed"
 else
-  echo "Installing Chromium browser"
+  echo "Chromium browser not instaleld... installing"
   sudo apt-get update -q 2>&1 > $logDir/apt.log
   sudo apt-get install -y ttf-mscorefonts-installer chromium 2>&1 > $logDir/install.log
 fi
@@ -35,15 +35,24 @@ fi
 if which xset 2>&1 > /dev/null; then
   echo "xset is installed"
 else
-  echo "Installing x11 utilities"
+  echo "xset not installed... installing x11 utilities"
   sudo apt-get install -y x11-xserver-utils 2>&1 >> $logDir/install.log
 fi
 
+#make sure xset (x11) is instaled. If not, install...
 if which unclutter 2>&1 >/dev/null; then
   echo "unclutter is installed"
 else
-  echo "Installing unclutter"
+  echo "unclutter not installed... installing"
   sudo apt-get install unclutter
+fi
+
+if which ntpdate 2>&1 >/dev/null; then
+  echo "ntpdate is installed"
+else
+  echo "ntpdate is not installed... installing"
+  sudo apt-get install ntpdate
+  sudo ntpdate -u ntp.ubuntu.com
 fi
 
 rcDest=$HOME/.bashrc
