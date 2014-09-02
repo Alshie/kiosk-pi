@@ -1,7 +1,10 @@
 #!/usr/bin/env bash
-logDir=$HOME/.gecko_pi/log
-bakDir=$HOME/.gecko_pi/bak
-tmpDir=$HOME/.gecko_pi/tmp
+
+echo "Restoring Autostart Settings..."
+
+logDir=$HOME/.kiosk_pi/log
+bakDir=$HOME/.kiosk_pi/bak
+tmpDir=$HOME/.kiosk_pi/tmp
 
 autoStartConfigPath="/home/$USER/.config/lxsession/LXDE"
 rm  $autoStartConfigPath/autostart
@@ -14,5 +17,16 @@ sudo mv $xAutostartBackup $xAutostart
 
 mv $bakDir/bashrc $HOME/.bashrc
 
-sudo apt-get remove chromium -y
-sudo apt-get autoremove -y
+
+echo "Do you wish to also uninstall Chromium?"
+select yn in "Yes" "No"; do
+    case $yn in
+        Yes ) 
+			sudo apt-get remove chromium -y
+			sudo apt-get autoremove -y
+			break;;
+        No ) 
+			exit;;
+    esac
+done
+

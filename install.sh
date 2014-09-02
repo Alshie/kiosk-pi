@@ -6,22 +6,22 @@ dashUrl="$DASHBOARD_URL"
 
 if [[ -z "$dashUrl" ]] ; then
 echo "Please set dashboard url like so:"
-echo "  export DASHBOARD_URL='https://example.geckoboard.com/dashboards/someid'"
+echo "  export DASHBOARD_URL='https://webaddress:port'"
 echo "and re-run this script with:"
-echo "  curl https://github.com/geckoboard/gecko-pi/blob/master/install.sh | bash"
+echo "  curl https://github.com/stevebargelt/kiosk-pi/blob/master/install.sh | bash"
 exit 1
 fi
 piUser="$USER"
 
-logDir=$HOME/.gecko_pi/log
-bakDir=$HOME/.gecko_pi/bak
-tmpDir=$HOME/.gecko_pi/tmp
+logDir=$HOME/.kiosk_pi/log
+bakDir=$HOME/.kiosk_pi/bak
+tmpDir=$HOME/.kiosk_pi/tmp
 
 mkdir -p $logDir
 mkdir -p $bakDir
 mkdir -p $tmpDir
 
-echo "Welcome to Gecko Pi setup!"
+echo "Welcome to Kiosk Pi setup!"
 
 if which chromium 2>&1 > /dev/null ; then
   echo "Chromium is already installed"
@@ -39,6 +39,13 @@ else
   sudo apt-get install -y x11-xserver-utils 2>&1 >> $logDir/install.log
 fi
 
+if which unclutter 2>&1 >/dev/null; then
+  echo "unclutter is installed"
+else
+  echo "Installing unclutter"
+  sudo apt-get install unclutter
+fi
+
 rcDest=$HOME/.bashrc
 rcBack=$tmpDir/bashrc
 rcTmp=$tmpDir/bashrc
@@ -48,7 +55,7 @@ if [[ ! -e $rcBack ]] ; then
   cp $rcDest $rcBack
 fi
 
-echo "Disabling screen power saving"
+echo "Disabling screen power saving and hiding the mouse"
 
 cat <<EOF > $rcTmp
 #!/bin/sh -e
@@ -61,7 +68,7 @@ if [[ -n "\$DISPLAY" ]] ; then
   xset s off
   xset -dpms
   xset s noblank
-
+  unclutter -display \$DISPLAY -noevents -grab
 fi
 EOF
 
