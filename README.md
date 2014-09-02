@@ -20,5 +20,5 @@ curl -L https://raw.github.com/stevebargelt/kiosk-pi/master/install.sh | bash
 You can revert your Pi with:
 
 ```bash
-curl -L https://raw.github.com/geckoboard/gecko-pi/master/rollback.sh | bash
+curl -L https://raw.github.com/stevebargelt/kiosk-pi/master/rollback.sh | bash
 ```
